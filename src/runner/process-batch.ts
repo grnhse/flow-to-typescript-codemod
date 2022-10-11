@@ -149,7 +149,10 @@ export async function processBatchAsync(
           }
         }
 
-        await fs.outputFile(tsFilePath, newFileText);
+        await fs.outputFile(
+          tsFilePath,
+          process.env.RENAME_ONLY ? fileText : newFileText
+        );
       } catch (error) {
         // Report errors, but don’t crash the worker...
         reporter.error(filePath, error);
